@@ -1,6 +1,9 @@
 # Introduction
 Small python script meant to interface between a Mosquitto broker and a MySQL Database.
 
+Current scripts works by creating a connection to the MySQL DB and to the Mosquitto broker while subscribing to predefined topics.
+After subscribing, the script forwards each message received to it's according method, following a predefined computation, which them, adds the messages payload to the database.
+
 
 # Configuration
 Before using the script, needs to be defined a `config.py` file to define your system's constants.
@@ -15,18 +18,18 @@ import controller
 Then, define the configuration of your MySQL database:
 ```python
 mysql = {
-    'user' = 'root',
-    'password' = 'root',
-    'host' = 'localhost',
-    'database' = 'db'
+    'user': 'root',
+    'password': 'root',
+    'host': 'localhost',
+    'database': 'db'
 }
 ```
 
 Finally, define your `paths` dictionary:
 ```python
 paths = {
-    "topics/temperature" = controller.methodThatDealsWithTemperature,
-    "topics/weight" = controller.methodThatDealsWithWeight
+    "topics/temperature": controller.methodThatDealsWithTemperature,
+    "topics/weight": controller.methodThatDealsWithWeight
 }
 ```
 
