@@ -51,7 +51,7 @@ def modelWeight(msg):
     cnx.close()
 
 
-def DB(payloads):
+def DB(topic, fields, values):
     con = mysql.connector.connect(user=cfg.mysql['user'],
                                   password=cfg.mysql['password'],
                                   host=cfg.mysql['host'],
@@ -62,5 +62,9 @@ def DB(payloads):
     fields = ', '.join(fields)
     values = ", ".join(values)
 
-    add_data = "INSERT INTO {} {} VALUES {}".format(cfg.paths[msg.topic]['table'], fields, values)
-    print(add_data)
+    add_data = "INSERT INTO {} ({}) VALUES ({})".format(cfg.paths[topic]['table'],
+                                                        fields, values)
+    cursor.execute(add_data)
+    con.commit()
+    cursor.close()
+    con.close()
