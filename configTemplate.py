@@ -2,27 +2,28 @@
 mysql = {
     'user': 'root',
     'password': 'root',
-    'host': 'localhost',
+    'hostDB': '127.0.0.1',
     'database': 'db'
 }
 
 mosquitto = {
-    'username': 'usuario',
+    'username': 'user',
     'pwd': '123',
+    'hostMQTT': '127.0.0.1',
     'port': 1883,
     'log': True
 }
 
 paths = {
-    'topics/topic': {
-        'table': 'topic',
+    'sensors/temperature': {
+        'table': 'colmeia_coleta',
         'fields': [
-            'topic_id',
-            'value_id',
+            'colmeia_id',
+            'sensor_id',
             'value',
         ],
-        'fieldValueSeparator': ',',
-        'separator': '/',
+        'fieldValueSeparator': '/',
+        'separator': '-',
         'qos': 0
     },
 }

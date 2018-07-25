@@ -54,7 +54,7 @@ def modelWeight(msg):
 def DB(topic, fields, values):
     con = mysql.connector.connect(user=cfg.mysql['user'],
                                   password=cfg.mysql['password'],
-                                  host=cfg.mysql['host'],
+                                  host=cfg.mysql['hostDB'],
                                   database=cfg.mysql['database'])
 
     cursor = con.cursor()
@@ -62,8 +62,10 @@ def DB(topic, fields, values):
     fields = ', '.join(fields)
     values = ", ".join(values)
 
-    add_data = "INSERT INTO {} ({}) VALUES ({})".format(cfg.paths[topic]['table'],
-                                                        fields, values)
+    add_data = "INSERT INTO {} ({}) VALUES ({});".format(cfg.paths[topic]['table'],
+                                                         fields, values)
+    print(add_data)
+
     cursor.execute(add_data)
     con.commit()
     cursor.close()
